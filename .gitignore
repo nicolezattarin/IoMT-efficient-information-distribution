@@ -6,6 +6,11 @@ __pycache__/
 # C extensions
 *.so
 
+#data 
+OpportunityUCIDataset*
+
+#mac
+*.DS_Store
 # Distribution / packaging
 .Python
 build/
