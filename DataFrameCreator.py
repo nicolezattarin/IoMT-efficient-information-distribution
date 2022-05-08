@@ -45,7 +45,9 @@ def main(args):
             if counter%50==0: print('Loading {} of {}'.format(counter, len(files)))
             counter+=1
             df = df.append(load_data(args.path, file))
-        df.to_csv('data_frames/all_data.csv')
+        print('saving, be patient 💓')
+        df.to_csv('data_frames/all_data.csv', index=False)
+
 
     elif args.each:
         files = []
@@ -60,11 +62,11 @@ def main(args):
             if counter%50==0: print('Loading {} of {}'.format(counter, len(files)))
             counter+=1
             df = load_data(args.path, file)
-            df.to_csv('data_frames/' + file[:-4] + '.csv')
+            df.to_csv('data_frames/' + file[:-4] + '.csv', index=False)
             
     elif args.file is not None:
         df = load_data(args.path, args.file)
-        df.to_csv('data_frames/' + args.file[:-4] + '.csv')
+        df.to_csv('data_frames/' + args.file[:-4] + '.csv', index=False)
          
 if __name__ == '__main__':
     args = parser.parse_args()
