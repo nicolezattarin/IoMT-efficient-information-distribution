@@ -20,3 +20,8 @@ Columns of the new dataframe are:
 - path: path to the folder containing the data
 - file: name of the file to be loaded
 
+run DataFrameCreator, which saves data in a proper format, and then upload data in any python scope as follows:
+````
+import pandas as pd
+df = pd.read_csv("data_frames/GaCo03_01.csv")
+````
