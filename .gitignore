@@ -5,9 +5,11 @@ __pycache__/
 
 # C extensions
 *.so
-
+#matlab data
+*.mat
 #data 
 OpportunityUCIDataset*
+20110114KTMD_Anesthesia+and+Sleep_George_Toru+Yanagawa_mat_ECoG128*
 
 #mac
 *.DS_Store
