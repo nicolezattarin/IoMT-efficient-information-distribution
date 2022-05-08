@@ -16,6 +16,7 @@ Columns of the new dataframe are:
 
  DataFrameCreator takes the following arguments:
 - all: if True, all the data is loaded, otherwise only the data from a specific file is loaded
+- each: if true, a single dataframe is created for each file, otherwise all the data is loaded in one dataframe
 - path: path to the folder containing the data
 - file: name of the file to be loaded
 
