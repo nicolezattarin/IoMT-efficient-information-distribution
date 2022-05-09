@@ -1,4 +1,8 @@
 # IoMT-project
+## Requirements
+To make sure you have all the packages you need to run the scripts, download this folder and run:
+`sh install.sh`
+all the scripts will be installed with pip.
 
 ## Load data
 Dataset available [here](https://physionet.org/content/gaitpdb/1.0.0/)
