@@ -1,3 +1,7 @@
+"""
+This script is used to cluster the sensor data of the ADL dataset.
+the clustering is performed with a brute force approach, i.e. ignoring the kind of sensor data. 
+"""
 import numpy as np
 import pandas as pd
 import seaborn as sns
@@ -10,8 +14,9 @@ import argparse
 argparser = argparse.ArgumentParser()
 argparser.add_argument('--subject', type=int, default=1)
 argparser.add_argument('--run', type=int, default=1)
+argparser.add_argument('--sensor_type', type=str, default='triaxial_acc')
 
-def main(subject, run):
+def main(subject, run, sensor_type):
     """
     parameters:
         subject: index of the subject
@@ -19,7 +24,7 @@ def main(subject, run):
     """
     data = load_data_adl(subject, run)
     df_LW = get_locomotion_data(data, [2, 5])
-    lie_walk = get_sensor_data(df_LW)
+    lie_walk = get_sensor_data(df_LW, sensor_type)
 
 
     #############################################################################
@@ -36,14 +41,22 @@ def main(subject, run):
     timeW = walk_train['MILLISEC'].values
     walk_train = walk_train.drop(['MILLISEC'], axis=1)
 
+    # create all folders
     if not os.path.isdir('clustering_results/subject_{}'.format(subject)): 
         os.mkdir('clustering_results/subject_{}'.format(subject))
     if not os.path.isdir('clustering_results/subject_{}/run_{}'.format(subject, run)): 
         os.mkdir('clustering_results/subject_{}/run_{}'.format(subject, run))
+    if not os.path.isdir('clustering_results/subject_{}/run_{}/lying'.format(subject, run)):
+        os.mkdir('clustering_results/subject_{}/run_{}/lying'.format(subject, run))
+    if not os.path.isdir('clustering_results/subject_{}/run_{}/walking'.format(subject, run)):
+        os.mkdir('clustering_results/subject_{}/run_{}/walking'.format(subject, run))
+    if not os.path.isdir('clustering_results/subject_{}/run_{}/lying/sensor_type_{}'.format(subject, run, sensor_type)):
+        os.mkdir('clustering_results/subject_{}/run_{}/lying/sensor_type_{}'.format(subject, run, sensor_type))
+    if not os.path.isdir('clustering_results/subject_{}/run_{}/walking/sensor_type_{}'.format(subject, run, sensor_type)):
+        os.mkdir('clustering_results/subject_{}/run_{}/walking/sensor_type_{}'.format(subject, run, sensor_type))
 
     #############################################################################
-
-    nclusters = [2, 3, 4, 6, 8, 10]
+    nclusters = [2, 3, 4, 6]
     if not os.path.isdir('clustering_results'): os.mkdir('clustering_results')
 
     # LYING DATA
@@ -69,10 +82,8 @@ def main(subject, run):
         df_lie_centers['MILLISEC'] = lie_time
         df_lie_centers = df_lie_centers.sort_values(by='MILLISEC')
         df_lie_centers.reset_index(drop=True, inplace=True)
-
-        if not os.path.isdir('clustering_results/subject_{}/run_{}/lying'.format(subject, run)):
-            os.mkdir('clustering_results/subject_{}/run_{}/lying'.format(subject, run))
-        df_lie_centers.to_csv('clustering_results/subject_{}/run_{}/lying/{}_clusters.csv'.format(subject, run, n))
+        df_lie_centers.to_csv('clustering_results/subject_{}/run_{}/lying/sensor_type_{}/{}_clusters.csv'\
+                            .format(subject, run, sensor_type, n), index=False)
 
     # WALKING DATA
     print("Walking data")
@@ -96,11 +107,9 @@ def main(subject, run):
         df_walk_centers['MILLISEC'] = walk_time
         df_walk_centers = df_walk_centers.sort_values(by='MILLISEC')
         df_walk_centers.reset_index(drop=True, inplace=True)
-
-        if not os.path.isdir('clustering_results/subject_{}/run_{}/walking'.format(subject, run)):
-            os.mkdir('clustering_results/subject_{}/run_{}/walking'.format(subject, run))
-        df_walk_centers.to_csv('clustering_results/subject_{}/run_{}/walking/{}_clusters.csv'.format(subject, run, n))
+        df_walk_centers.to_csv('clustering_results/subject_{}/run_{}/walking/sensor_type_{}/{}_clusters.csv'\
+                        .format(subject, run, sensor_type, n), index=False)
 
 if __name__ == '__main__':
-    args = argparser.parse_args()
-    main(args.subject, args.run)
+    args = vars(argparser.parse_args())
+    main(**args)
