@@ -114,6 +114,10 @@ def get_sensor_data(data, sensor_type):
     sensor_type: label of the sensors, can be "triaxial_acc", "IMU_acc", "IMU_gyro", "IMU_mag" or "all"
                  see figure at
     """
+
+    if not sensor_type in {'triaxial_acc', 'IMU_acc', 'IMU_gyro', 'IMU_mag', 'all'}:
+        raise ValueError('sensor_type must be one of the following: "triaxial_acc", "IMU_acc", "IMU_gyro", "IMU_mag", "all"')
+        
     columns = np.loadtxt('data_cleaned/columns_opportunity.txt', delimiter='\n', dtype=str)
 
     # get the signals for the accelerometer and compute the modulus of the signals on x, y and z
