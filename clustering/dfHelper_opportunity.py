@@ -8,14 +8,14 @@ def load_data_adl(user, run):
 
     from string import digits
     # get names for all the columns
-    header = np.loadtxt('OpportunityUCIDataset/dataset/column_names.txt', delimiter='\n', dtype=str, skiprows=1)
+    header = np.loadtxt('../OpportunityUCIDataset/dataset/column_names.txt', delimiter='\n', dtype=str, skiprows=1)
     header = header.tolist()
     header.remove('Label columns: ')
     remove_digits = str.maketrans('', '', digits)
 
     header = list(map (lambda x: x.replace('Column: ', '').split(";", 1)[0].translate(remove_digits).lstrip(), header))
 
-    data = pd.read_csv(f'OpportunityUCIDataset/dataset/S{user}-ADL{run}.dat', sep=' ', header=None)
+    data = pd.read_csv(f'../OpportunityUCIDataset/dataset/S{user}-ADL{run}.dat', sep=' ', header=None)
     data.columns = header
 
     #save a file with columns names
@@ -153,12 +153,10 @@ def get_sensor_data(data):
     imu_data.drop(imu_columns, axis=1, inplace=True)
 
     time = data['MILLISEC']
-    activity_labels = data
-    activity_labels.drop (['MILLISEC'], axis=1, inplace=True)
-    activity_labels.drop (acc_columns, axis=1, inplace=True)
+    activity_labels = data[data.columns[-7:]]
     
     df = acc_data
-    df = df.append(time)
+    df = df.join(time)
     df = df.join(imu_data)
     df = df.join(activity_labels)
 
