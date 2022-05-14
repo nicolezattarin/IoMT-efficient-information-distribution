@@ -5,7 +5,7 @@ To make sure you have all the packages you need to run the scripts, download thi
 all the scripts will be installed with pip.
 
 ## Load data
-Dataset available [here](https://archive.ics.uci.edu/ml/datasets/OPPORTUNITY+Activity+Recognition), detailed description [here](file:///Users/nicolez/Documents/GitHub/IoMT-project/OpportunityUCIDataset/doc/documentation.html).
+Dataset available [here](https://archive.ics.uci.edu/ml/datasets/OPPORTUNITY+Activity+Recognition).
 
 Sensors are located as shown in the figure below.
 <p align="center">
