@@ -14,7 +14,7 @@ import argparse
 argparser = argparse.ArgumentParser()
 argparser.add_argument('--subject', type=int, default=1)
 argparser.add_argument('--run', type=int, default=1)
-argparser.add_argument('--sensor_type', type=str, default='triaxial_acc')
+argparser.add_argument('--sensor_type', type=str, default='IMU_acc')
 
 def main(subject, run, sensor_type):
     """
@@ -56,7 +56,7 @@ def main(subject, run, sensor_type):
         os.mkdir('clustering_results/subject_{}/run_{}/walking/sensor_type_{}'.format(subject, run, sensor_type))
 
     #############################################################################
-    nclusters = [2, 3, 4, 6]
+    nclusters = [1, 2, 3]
     if not os.path.isdir('clustering_results'): os.mkdir('clustering_results')
 
     # LYING DATA
