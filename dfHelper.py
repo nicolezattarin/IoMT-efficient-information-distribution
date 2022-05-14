@@ -104,60 +104,71 @@ def get_signals (data, signals):
     columns_keep = [data.columns[0], *signals, *data.columns[243:]]
     return data[columns_keep]
 
-def get_sensor_data(data):
+def get_sensor_data(data, sensor_type):
     """
     Following Hanzika thesis we only study gyroscope, accelerometer and magnetometer, 
     x, y and z coordinates are combined into a single single dimension by taking the module
 
     parameters:
     data: pandas dataframe
-    sensors: label of the sensors, e.g. 'ACCELEROMETER' or 'InertialMeasurementUnit'
+    sensor_type: label of the sensors, can be "triaxial_acc", "IMU_acc", "IMU_gyro", "IMU_mag" or "all"
+                 see figure at
     """
     columns = np.loadtxt('data_cleaned/columns_opportunity.txt', delimiter='\n', dtype=str)
 
     # get the signals for the accelerometer and compute the modulus of the signals on x, y and z
     # accelerometer signals are in 1-37 columns
-    acc_columns = columns[1:37]
-    acc_data = data[acc_columns]
-    for i in range(0, len(acc_data.columns)-3, 3):
-        colx, coly, colz =  acc_data.columns[i], acc_data.columns[i+1], acc_data.columns[i+2]
-        x, y, z = acc_data[colx], acc_data[coly], acc_data[colz]
+    if sensor_type == 'triaxial_acc' or sensor_type == 'all':
+        acc_columns = columns[1:37]
+        acc_data = data[acc_columns]
+        for i in range(0, len(acc_data.columns)-3, 3):
+            colx, coly, colz =  acc_data.columns[i], acc_data.columns[i+1], acc_data.columns[i+2]
+            x, y, z = acc_data[colx], acc_data[coly], acc_data[colz]
 
-        newheader = acc_data.columns[i][:-1]+'_mod'
-        acc_data[newheader] = np.sqrt(x**2 + y**2 + z**2)
-    acc_data.drop(acc_columns, axis=1, inplace=True)
+            newheader = acc_data.columns[i][:-1]+'_mod'
+            acc_data[newheader] = np.sqrt(x**2 + y**2 + z**2)
+        acc_data.drop(acc_columns, axis=1, inplace=True)
 
     # imu signals are in 38-134 columns organized as follows:
     # (acc x, acc y, acc z, gyro y, gyro z, mag x, mag y, mag z, quaternion 1, quaternion 2, quaternion 3, quaternion 4)
     # up to 102
-    imu_columns = columns[37:102]
-    imu_data = data[imu_columns]
-    for i in range(0, len(imu_columns), 13):
-        #columns 
-        acccols = imu_columns[i:i+3]
-        gyrocols = imu_columns[i+3:i+6]
-        magcols = imu_columns[i+6:i+9]
-        
-        #data
-        accx, accy, accz = np.array(imu_data[acccols[0]]), np.array(imu_data[acccols[1]]), np.array(imu_data[acccols[2]])
-        gyrox, gyroy, gyroz = np.array(imu_data[gyrocols[0]]), np.array(imu_data[gyrocols[1]]), np.array(imu_data[gyrocols[2]])
-        magx, magy, magz = np.array(imu_data[magcols[0]]), np.array(imu_data[magcols[1]]), np.array(imu_data[magcols[2]])
-        
-        accheader = imu_columns[i][:-1]+'_mod'
-        gyroheader = imu_columns[i+3][:-1]+'_mod'
-        magheader = imu_columns[i+5][:-1]+'_mod'
-        imu_data[accheader] = np.sqrt(np.square(accx) + np.square(accy) + np.square(accz))
-        imu_data[magheader] = np.sqrt(np.square(magx) + np.square(magy) + np.square(magz))
-        imu_data[gyroheader] = np.sqrt(np.square(gyrox) + np.square(gyroy) + np.square(gyroz))
+    elif sensor_type == 'IMU_acc' or sensor_type == 'all' or sensor_type == 'IMU_gyro' or sensor_type == 'IMU_mag':
+        imu_columns = columns[37:102]
+        imu_data = data[imu_columns]
+        for i in range(0, len(imu_columns), 13):
+            #columns 
+            if sensor_type == 'IMU_acc' or sensor_type == 'all':
+                acccols = imu_columns[i:i+3]
+                accx, accy, accz = np.array(imu_data[acccols[0]]), np.array(imu_data[acccols[1]]), np.array(imu_data[acccols[2]])
+                accheader = imu_columns[i][:-1]+'_mod'
+                imu_data[accheader] = np.sqrt(np.square(accx) + np.square(accy) + np.square(accz))
+            elif sensor_type == 'IMU_gyro' or sensor_type == 'all':
+                gyrocols = imu_columns[i+3:i+6]
+                gyrox, gyroy, gyroz = np.array(imu_data[gyrocols[0]]), np.array(imu_data[gyrocols[1]]), np.array(imu_data[gyrocols[2]])
+                gyroheader = imu_columns[i+3][:-1]+'_mod'
+                imu_data[gyroheader] = np.sqrt(np.square(gyrox) + np.square(gyroy) + np.square(gyroz))
+            elif sensor_type == 'IMU_mag' or sensor_type == 'all':
+                magcols = imu_columns[i+6:i+9]
+                magx, magy, magz = np.array(imu_data[magcols[0]]), np.array(imu_data[magcols[1]]), np.array(imu_data[magcols[2]])
+                magheader = imu_columns[i+5][:-1]+'_mod'
+                imu_data[magheader] = np.sqrt(np.square(magx) + np.square(magy) + np.square(magz))
 
-    imu_data.drop(imu_columns, axis=1, inplace=True)
+        imu_data.drop(imu_columns, axis=1, inplace=True)
 
     time = data['MILLISEC']
     activity_labels = data[data.columns[-7:]]
     
-    df = acc_data
-    df = df.join(time)
-    df = df.join(imu_data)
-    df = df.join(activity_labels)
-
+    if sensor_type == 'all':
+        df = acc_data
+        df = df.join(time)
+        df = df.join(imu_data)
+        df = df.join(activity_labels)
+    elif sensor_type == 'triaxial_acc':
+        df = acc_data
+        df = df.join(time)
+        df = df.join(activity_labels)
+    else:
+        df = imu_data
+        df = df.join(time)
+        df = df.join(activity_labels)
     return df
