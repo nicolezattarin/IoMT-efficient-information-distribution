@@ -5,7 +5,7 @@ To make sure you have all the packages you need to run the scripts, download thi
 all the scripts will be installed with pip.
 
 ## Load data
-Dataset available [here](https://archive.ics.uci.edu/ml/datasets/OPPORTUNITY+Activity+Recognition)
+Dataset available [here](https://physionet.org/content/gaitpdb/1.0.0/)
 
 File DataFrameCreator.py takes data from the original folder, creates a dataframe and saves it in the folder data_frames.
 Columns of the new dataframe are:
