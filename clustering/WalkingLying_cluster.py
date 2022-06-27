@@ -14,18 +14,24 @@ import argparse
 argparser = argparse.ArgumentParser()
 argparser.add_argument('--subject', type=int, default=1)
 argparser.add_argument('--run', type=int, default=1)
-argparser.add_argument('--sensor_type', type=str, default='IMU_acc')
+argparser.add_argument('--sensor_type', type=str, default='IMU_mag')
 
 def main(subject, run, sensor_type):
     """
+    filter locomotion data for each sensor type and cluster them
+    the idea is that we want to show if clustering and taking the centers allows to distinguish between standing and walking.
+     
     parameters:
         subject: index of the subject
         run: dataset index for a given subject
+        sensor_type: type of sensor to be clustered
     """
-    data = load_data_adl(subject, run)
+    if not sensor_type in {'triaxial_acc', 'IMU_acc', 'IMU_gyro', 'IMU_mag', 'all'}:
+        raise ValueError('sensor_type must be one of the following: "triaxial_acc", "IMU_acc", "IMU_gyro", "IMU_mag", "all"')
+   
+    data = load_data_adl(subject, run, '../OpportunityUCIDataset')
     df_LW = get_locomotion_data(data, [2, 5])
     lie_walk = get_sensor_data(df_LW, sensor_type)
-
 
     #############################################################################
     #           Clustering: apply clustering for each time step                 #
@@ -43,20 +49,20 @@ def main(subject, run, sensor_type):
 
     # create all folders
     if not os.path.isdir('clustering_results/subject_{}'.format(subject)): 
-        os.mkdir('clustering_results/subject_{}'.format(subject))
+        os.makedirs('clustering_results/subject_{}'.format(subject))
     if not os.path.isdir('clustering_results/subject_{}/run_{}'.format(subject, run)): 
-        os.mkdir('clustering_results/subject_{}/run_{}'.format(subject, run))
+        os.makedirs('clustering_results/subject_{}/run_{}'.format(subject, run))
     if not os.path.isdir('clustering_results/subject_{}/run_{}/lying'.format(subject, run)):
-        os.mkdir('clustering_results/subject_{}/run_{}/lying'.format(subject, run))
+        os.makedirs('clustering_results/subject_{}/run_{}/lying'.format(subject, run))
     if not os.path.isdir('clustering_results/subject_{}/run_{}/walking'.format(subject, run)):
-        os.mkdir('clustering_results/subject_{}/run_{}/walking'.format(subject, run))
+        os.makedirs('clustering_results/subject_{}/run_{}/walking'.format(subject, run))
     if not os.path.isdir('clustering_results/subject_{}/run_{}/lying/sensor_type_{}'.format(subject, run, sensor_type)):
-        os.mkdir('clustering_results/subject_{}/run_{}/lying/sensor_type_{}'.format(subject, run, sensor_type))
+        os.makedirs('clustering_results/subject_{}/run_{}/lying/sensor_type_{}'.format(subject, run, sensor_type))
     if not os.path.isdir('clustering_results/subject_{}/run_{}/walking/sensor_type_{}'.format(subject, run, sensor_type)):
-        os.mkdir('clustering_results/subject_{}/run_{}/walking/sensor_type_{}'.format(subject, run, sensor_type))
+        os.makedirs('clustering_results/subject_{}/run_{}/walking/sensor_type_{}'.format(subject, run, sensor_type))
 
     #############################################################################
-    nclusters = [1, 2, 3]
+    nclusters = [1, 2, 3, 4]
     if not os.path.isdir('clustering_results'): os.mkdir('clustering_results')
 
     # LYING DATA
@@ -84,12 +90,10 @@ def main(subject, run, sensor_type):
         df_lie_centers.reset_index(drop=True, inplace=True)
         df_lie_centers.to_csv('clustering_results/subject_{}/run_{}/lying/sensor_type_{}/{}_clusters.csv'\
                             .format(subject, run, sensor_type, n), index=False)
-
     # WALKING DATA
     print("Walking data")
     for n in nclusters:
         walk_centers, walk_scores, walk_time = [], [], []
-        print(f'n = {n}')
         for i in range(walk_train.shape[0]):
             if i%600==0: print("iteration {} of {}".format(i, walk_train.shape[0]))
             data = walk_train.iloc[i, :].values.reshape(-1, 1)
@@ -109,6 +113,8 @@ def main(subject, run, sensor_type):
         df_walk_centers.reset_index(drop=True, inplace=True)
         df_walk_centers.to_csv('clustering_results/subject_{}/run_{}/walking/sensor_type_{}/{}_clusters.csv'\
                         .format(subject, run, sensor_type, n), index=False)
+
+
 
 if __name__ == '__main__':
     args = vars(argparser.parse_args())
