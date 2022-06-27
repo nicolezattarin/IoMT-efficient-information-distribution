@@ -1,21 +1,21 @@
 import numpy as np
 import pandas as pd
 
-def load_data_adl(user, run):
+def load_data_adl(user, run, path):
     """
     Loads the data for a given user and run.
     """
 
     from string import digits
     # get names for all the columns
-    header = np.loadtxt('../OpportunityUCIDataset/dataset/column_names.txt', delimiter='\n', dtype=str, skiprows=1)
+    header = np.loadtxt(path+'/dataset/column_names.txt', delimiter='\n', dtype=str, skiprows=1)
     header = header.tolist()
     header.remove('Label columns: ')
     remove_digits = str.maketrans('', '', digits)
 
     header = list(map (lambda x: x.replace('Column: ', '').split(";", 1)[0].translate(remove_digits).lstrip(), header))
 
-    data = pd.read_csv(f'../OpportunityUCIDataset/dataset/S{user}-ADL{run}.dat', sep=' ', header=None)
+    data = pd.read_csv(path+f'/dataset/S{user}-ADL{run}.dat', sep=' ', header=None)
     data.columns = header
 
     #save a file with columns names
@@ -70,7 +70,7 @@ def get_locomotion(data, loc):
     if not loc in {1, 2, 3, 4, 5 }: raise ValueError('loc must be one of the following: 1, 2, 3, 4, 5')
     return data[data['Locomotion'] == loc]
 
-def get_locomotion_data(data, locs = [1, 2, 3, 4, 5]):
+def get_locomotion_data(data, locs = [1, 2, 4, 5]):
     """
     returns data for a given locomotion activity
     parameters:
@@ -84,8 +84,8 @@ def get_locomotion_data(data, locs = [1, 2, 3, 4, 5]):
 
     """
 
-    if not set(locs).issubset({1, 2, 3, 4, 5}) != len(locs): 
-        raise ValueError('loc must be one of the following: 1, 2, 3, 4, 5')
+    if not set(locs).issubset({1, 2, 4, 5}): 
+        raise ValueError('loc must be one of the following: 1, 2, 4, 5')
 
     df = data[data['Locomotion']==locs[0]]
     for i in range(1, len(locs)):
@@ -136,7 +136,7 @@ def get_sensor_data(data, sensor_type):
     # imu signals are in 38-134 columns organized as follows:
     # (acc x, acc y, acc z, gyro y, gyro z, mag x, mag y, mag z, quaternion 1, quaternion 2, quaternion 3, quaternion 4)
     # up to 102
-    elif sensor_type == 'IMU_acc' or sensor_type == 'all' or sensor_type == 'IMU_gyro' or sensor_type == 'IMU_mag':
+    if sensor_type == 'IMU_acc' or sensor_type == 'all' or sensor_type == 'IMU_gyro' or sensor_type == 'IMU_mag':
         imu_columns = columns[37:102]
         imu_data = data[imu_columns]
         for i in range(0, len(imu_columns), 13):
