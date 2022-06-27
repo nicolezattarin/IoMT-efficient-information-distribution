@@ -13,6 +13,9 @@ OpportunityUCIDataset*
 gait-in-parkinsons-disease-1.0.0*
 data_frames*
 
+#data 
+*/clustering_results*
+*/clustering_results/*
 #mac
 *.DS_Store
 # Distribution / packaging
