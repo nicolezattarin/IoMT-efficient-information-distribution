@@ -126,11 +126,11 @@ def get_sensor_data(data, sensor_type):
         acc_columns = columns[1:37]
         acc_data = data[acc_columns]
         for i in range(0, len(acc_data.columns)-3, 3):
-            colx, coly, colz =  acc_data.columns[i], acc_data.columns[i+1], acc_data.columns[i+2]
-            x, y, z = acc_data[colx], acc_data[coly], acc_data[colz]
+            x, y, z = np.array(acc_data.iloc[:, i]), np.array(acc_data.iloc[:, i+1]), np.array(acc_data.iloc[:, i+2])
 
             newheader = acc_data.columns[i][:-1]+'_mod'
-            acc_data[newheader] = np.sqrt(x**2 + y**2 + z**2)
+            df = pd.DataFrame(np.sqrt(x**2 + y**2 + z**2), columns=[newheader])
+            acc_data = acc_data.join(df)
         acc_data.drop(acc_columns, axis=1, inplace=True)
 
     # imu signals are in 38-134 columns organized as follows:
@@ -144,19 +144,22 @@ def get_sensor_data(data, sensor_type):
             if sensor_type == 'IMU_acc' or sensor_type == 'all':
                 acccols = imu_columns[i:i+3]
                 accx, accy, accz = np.array(imu_data[acccols[0]]), np.array(imu_data[acccols[1]]), np.array(imu_data[acccols[2]])
+
                 accheader = imu_columns[i][:-1]+'_mod'
-                imu_data[accheader] = np.sqrt(np.square(accx) + np.square(accy) + np.square(accz))
+                df = pd.DataFrame(np.sqrt(np.square(accx) + np.square(accy) + np.square(accz)), columns=[accheader])
+                imu_data = imu_data.join(df)
             elif sensor_type == 'IMU_gyro' or sensor_type == 'all':
                 gyrocols = imu_columns[i+3:i+6]
                 gyrox, gyroy, gyroz = np.array(imu_data[gyrocols[0]]), np.array(imu_data[gyrocols[1]]), np.array(imu_data[gyrocols[2]])
                 gyroheader = imu_columns[i+3][:-1]+'_mod'
-                imu_data[gyroheader] = np.sqrt(np.square(gyrox) + np.square(gyroy) + np.square(gyroz))
+                df = pd.DataFrame(np.sqrt(np.square(gyrox) + np.square(gyroy) + np.square(gyroz)), columns=[gyroheader])
+                imu_data = imu_data.join(df)
             elif sensor_type == 'IMU_mag' or sensor_type == 'all':
                 magcols = imu_columns[i+6:i+9]
                 magx, magy, magz = np.array(imu_data[magcols[0]]), np.array(imu_data[magcols[1]]), np.array(imu_data[magcols[2]])
                 magheader = imu_columns[i+5][:-1]+'_mod'
-                imu_data[magheader] = np.sqrt(np.square(magx) + np.square(magy) + np.square(magz))
-
+                df = pd.DataFrame(np.sqrt(np.square(magx) + np.square(magy) + np.square(magz)), columns=[gyroheader])
+                imu_data = imu_data.join(df)
         imu_data.drop(imu_columns, axis=1, inplace=True)
 
     time = data['MILLISEC']
