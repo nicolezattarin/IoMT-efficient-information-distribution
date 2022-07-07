@@ -158,7 +158,7 @@ def get_sensor_data(data, sensor_type):
                 magcols = imu_columns[i+6:i+9]
                 magx, magy, magz = np.array(imu_data[magcols[0]]), np.array(imu_data[magcols[1]]), np.array(imu_data[magcols[2]])
                 magheader = imu_columns[i+5][:-1]+'_mod'
-                df = pd.DataFrame(np.sqrt(np.square(magx) + np.square(magy) + np.square(magz)), columns=[gyroheader])
+                df = pd.DataFrame(np.sqrt(np.square(magx) + np.square(magy) + np.square(magz)), columns=[magheader])
                 imu_data = imu_data.join(df)
         imu_data.drop(imu_columns, axis=1, inplace=True)
 
