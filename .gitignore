@@ -7,6 +7,10 @@ __pycache__/
 *.so
 #matlab data
 *.mat
+arima/*
+forecasting/*
+parkinson/*
+signal_window/*
 #data 
 OpportunityUCIDataset*
 20110114KTMD_Anesthesia+and+Sleep_George_Toru+Yanagawa_mat_ECoG128*
