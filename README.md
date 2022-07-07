@@ -30,7 +30,7 @@ For each of the sensor type, we perform a PCA and we compute the explained varia
 A possible result follows:
 
 <p align="center">
-  <img src="imgs/pca.png" width="700" />
+  <img src="imgs/ppca.png" width="700" />
 </p>
 From a physical point of view such observations suggest that there is high correlation among same sensor data, thus that it is possible to consider only a few sensors for each type. 
 
