@@ -36,13 +36,13 @@ From a physical point of view such observations suggest that there is high corre
 
 ## Clustering and validation
 
-1. Clustering: we consider data referring to two locomotion activities, walking and laying, and for each millisecond we apply KMeans clustering with 1 to 4 centers, example of the results:
+1. **Clustering**: we consider data referring to two locomotion activities, walking and laying, and for each millisecond we apply KMeans clustering with 1 to 4 centers, example of the results:
 
     <p align="center">
       <img src="imgs/clustering.png" width="600" />
     </p>
   
-2. Binary classification: we try to give an answer to the following question: how well can we still distinguish high level activity after clustering? The approach is straightforward: we train a binary classifier, binary for sake of simplicity, on part of the original features and validate its performances on a test subset. Finally, we test the accuracy of our model on the data obtained from the signals of the centroids obtained through KMeans. Two approaches are exploited:
+2. **Binary classification**: we try to give an answer to the following question: how well can we still distinguish high level activity after clustering? The approach is straightforward: we train a binary classifier, binary for sake of simplicity, on part of the original features and validate its performances on a test subset. Finally, we test the accuracy of our model on the data obtained from the signals of the centroids obtained through KMeans. Two approaches are exploited:
 
       - **Logistic Regression**: we build a dataset of amplitudes labeled with the corresponding locomotion activity, walking or laying, train a logistic regression test in on the cluster data, accuracy scores follow:
         <p align="center">
