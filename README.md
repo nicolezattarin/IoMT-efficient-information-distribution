@@ -17,12 +17,7 @@ Sensors are located as shown in the figure below.
 </p>
 
 
-In particular, dfHelper contains useful functions to load data and collect into an organized df:
-- load_data_adl: load data from ADL dataset given a subject and a run;
-- get_HL_activity_data: return the dataframe of data corresponding to the HL activities for a given dataframe;
-- get_locomotion_data: return the dataframe of data corresponding to the locomotion activities for a given dataframe;
-- get_signals: return the dataframe of data corresponding to the signals for a given dataframe;
-- get_sensor_data: returns a dataframe with only gyroscope, accelerometer and magnetometer data. For each signal we get the modulus of the three different components as done in Hanzika's thesis.
+In particular, dfHelper contains useful functions to load data and collect into an organized df.
 
 ## Principal components analysis
 For each of the sensor type, we perform a PCA and we compute the explained variance. Such quantity gives indeed an estimation of how much variance of the original dataset is encoded in each component, thus, indirectly, it refers to the amount of correlation of the original features. 
