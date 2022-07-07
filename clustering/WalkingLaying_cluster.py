@@ -32,8 +32,34 @@ def main(subject, run, sensor_type, metric):
    
     data = load_data_adl(subject, run, '../OpportunityUCIDataset')
     df_LW = get_locomotion_data(data, [2, 5])
-    lie_walk = get_sensor_data(df_LW, sensor_type)
 
+    if sensor_type != 'all':
+        lie_walk = get_sensor_data(df_LW, sensor_type)
+    else:
+        # IMU RUA, RLA, BACK
+        # triaxial: hip, back, RUA^, RUA_, RWR, RKN_
+        imu_acc = load_data_adl(subject, run, '../OpportunityUCIDataset')
+        imu_gyro = load_data_adl(subject, run, '../OpportunityUCIDataset')
+        triaxial_acc = load_data_adl(subject, run, '../OpportunityUCIDataset')
+        imu_acc = get_sensor_data(imu_acc, 'IMU_acc')
+        imu_gyro = get_sensor_data(imu_gyro, 'IMU_gyro')
+        triaxial_acc = get_sensor_data(triaxial_acc, 'triaxial_acc')
+
+        #drop millisec
+        imu_acc = imu_acc.drop(['MILLISEC'], axis=1)
+        imu_gyro = imu_gyro.drop(['MILLISEC'], axis=1)
+        triaxial_acc = triaxial_acc.drop(['MILLISEC'], axis=1)
+
+        lie_walk = pd.concat([imu_acc[imu_acc.columns[:2]], 
+                        imu_gyro[imu_gyro.columns[:2]], 
+                        triaxial_acc[triaxial_acc.columns[:1]],
+                        triaxial_acc[triaxial_acc.columns[3]],
+                        triaxial_acc[triaxial_acc.columns[5:9]],
+                        ], axis=1)
+
+
+
+    print (lie_walk.columns)
     #############################################################################
     #           Clustering: apply clustering for each time step                 #
     #############################################################################

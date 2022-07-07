@@ -19,9 +19,7 @@ data_frames*
 *.npy
 tex/*
 
-#data 
-*/clustering_results*
-*/clustering_results/*
+
 #mac
 *.DS_Store
 # Distribution / packaging
