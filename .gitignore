@@ -16,6 +16,8 @@ OpportunityUCIDataset*
 20110114KTMD_Anesthesia+and+Sleep_George_Toru+Yanagawa_mat_ECoG128*
 gait-in-parkinsons-disease-1.0.0*
 data_frames*
+*.npy
+tex/*
 
 #data 
 */clustering_results*
