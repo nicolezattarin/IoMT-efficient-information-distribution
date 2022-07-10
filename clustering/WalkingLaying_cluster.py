@@ -13,9 +13,9 @@ from dfHelper import*
 import argparse
 argparser = argparse.ArgumentParser()
 argparser.add_argument('--subject', type=int, default=1)
-argparser.add_argument('--run', type=int, default=1)
-argparser.add_argument('--sensor_type', type=str, default='IMU_gyro')
-argparser.add_argument('--metric', type=str, default='dtw')
+argparser.add_argument('--run', type=int, default=2)
+argparser.add_argument('--sensor_type', type=str, default='all')
+argparser.add_argument('--metric', type=str, default='euclidean')
 
 def main(subject, run, sensor_type, metric):
     """
@@ -45,19 +45,18 @@ def main(subject, run, sensor_type, metric):
         imu_gyro = get_sensor_data(imu_gyro, 'IMU_gyro')
         triaxial_acc = get_sensor_data(triaxial_acc, 'triaxial_acc')
 
-        #drop millisec
-        imu_acc = imu_acc.drop(['MILLISEC'], axis=1)
-        imu_gyro = imu_gyro.drop(['MILLISEC'], axis=1)
-        triaxial_acc = triaxial_acc.drop(['MILLISEC'], axis=1)
+        extra_cols = imu_acc[imu_acc.columns[-8:]]
+        lie_walk = imu_acc[imu_acc.columns[:-8]]
+        lie_walk = lie_walk.join(imu_gyro[imu_gyro.columns[:-8]])
+        lie_walk = lie_walk.join(triaxial_acc[triaxial_acc.columns[:-8]])
+        cols = lie_walk.columns.tolist()
+        from sklearn.preprocessing import StandardScaler
+        scaler = StandardScaler()
+        lie_walk = scaler.fit_transform(lie_walk)
+        lie_walk = pd.DataFrame(lie_walk, columns=cols)
+        lie_walk = lie_walk.join(extra_cols)
 
-        lie_walk = pd.concat([imu_acc[imu_acc.columns[:2]], 
-                        imu_gyro[imu_gyro.columns[:2]], 
-                        triaxial_acc[triaxial_acc.columns[:1]],
-                        triaxial_acc[triaxial_acc.columns[3]],
-                        triaxial_acc[triaxial_acc.columns[5:9]],
-                        ], axis=1)
-
-
+    
 
     print (lie_walk.columns)
     #############################################################################
@@ -90,7 +89,7 @@ def main(subject, run, sensor_type, metric):
         os.makedirs('clustering_results_{}/subject_{}/run_{}/walking/sensor_type_{}'.format(metric,subject, run, sensor_type))
 
     #############################################################################
-    nclusters = [1, 2, 3, 4]
+    nclusters = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     if not os.path.isdir('clustering_results_{}'.format(metric)): os.mkdir('clustering_results_{}'.format(metric))
 
     # laying DATA
