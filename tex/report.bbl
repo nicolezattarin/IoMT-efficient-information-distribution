@@ -1,0 +1,78 @@
+\begin{thebibliography}{8}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Daniel~Roggen and del R.~Millàn(2010)]{opportunity}
+Mirco Rossi Thomas Holleczek Gerhard Tröster Paul Lukowicz Gerald Pirkl David
+  Bannach Alois Ferscha Jakob Doppler Clemens Holzmann Marc Kurz Gerald Holl
+  Ricardo Chavarriaga Hesam Sagha Hamidreza~Bayati Daniel~Roggen,
+  Alberto~Calatroni and José del R.~Millàn.
+\newblock Collecting complex activity data sets in highly rich networked sensor
+  environments.
+\newblock \emph{Seventh International Conference on Networked Sensing Systems
+  (INSS’10), Kassel, Germany}, 2010.
+
+\bibitem[Jolliffe(2011)]{Jolliffe2011}
+Ian Jolliffe.
+\newblock \emph{Principal Component Analysis}, pages 1094--1096.
+\newblock Springer Berlin Heidelberg, Berlin, Heidelberg, 2011.
+\newblock ISBN 978-3-642-04898-2.
+\newblock \doi{10.1007/978-3-642-04898-2_455}.
+\newblock URL \url{https://doi.org/10.1007/978-3-642-04898-2_455}.
+
+\bibitem[Buitinck et~al.(2013)Buitinck, Louppe, Blondel, Pedregosa, Mueller,
+  Grisel, Niculae, Prettenhofer, Gramfort, Grobler, Layton, VanderPlas, Joly,
+  Holt, and Varoquaux]{sklearn_api}
+Lars Buitinck, Gilles Louppe, Mathieu Blondel, Fabian Pedregosa, Andreas
+  Mueller, Olivier Grisel, Vlad Niculae, Peter Prettenhofer, Alexandre
+  Gramfort, Jaques Grobler, Robert Layton, Jake VanderPlas, Arnaud Joly, Brian
+  Holt, and Ga{\"{e}}l Varoquaux.
+\newblock {API} design for machine learning software: experiences from the
+  scikit-learn project.
+\newblock In \emph{ECML PKDD Workshop: Languages for Data Mining and Machine
+  Learning}, pages 108--122, 2013.
+
+\bibitem[Lloyd(1957)]{kmeans}
+S.~P. Lloyd.
+\newblock Least squares quantization in pcm.
+\newblock In \emph{Technical Report RR-5497, Bell Lab, September.}, 1957.
+
+\bibitem[Tavenard et~al.(2020)Tavenard, Faouzi, Vandewiele, Divo, Androz,
+  Holtz, Payne, Yurchak, Ru{\ss}wurm, Kolar, and Woods]{JMLR:v21:20-091}
+Romain Tavenard, Johann Faouzi, Gilles Vandewiele, Felix Divo, Guillaume
+  Androz, Chester Holtz, Marie Payne, Roman Yurchak, Marc Ru{\ss}wurm, Kushal
+  Kolar, and Eli Woods.
+\newblock Tslearn, a machine learning toolkit for time series data.
+\newblock \emph{Journal of Machine Learning Research}, 21\penalty0
+  (118):\penalty0 1--6, 2020.
+\newblock URL \url{http://jmlr.org/papers/v21/20-091.html}.
+
+\bibitem[H.~Sakoe(1978)]{dtw}
+S.~Chiba H.~Sakoe.
+\newblock Dynamic programming algorithm optimization for spoken word
+  recognition.
+\newblock \emph{IEEE Transactions on Acoustics, Speech and Signal Processing},
+  26:\penalty0 43–49, 1978.
+
+\bibitem[Oguiza(2022)]{tsai}
+Ignacio Oguiza.
+\newblock tsai - a state-of-the-art deep learning library for time series and
+  sequential data.
+\newblock Github, 2022.
+\newblock URL \url{https://github.com/timeseriesAI/tsai}.
+
+\bibitem[Fawaz et~al.(2020)Fawaz, Lucas, Forestier, Pelletier, Schmidt, Weber,
+  Webb, Idoumghar, Muller, and Petitjean]{Ismail_Fawaz_2020}
+Hassan~Ismail Fawaz, Benjamin Lucas, Germain Forestier, Charlotte Pelletier,
+  Daniel~F. Schmidt, Jonathan Weber, Geoffrey~I. Webb, Lhassane Idoumghar,
+  Pierre-Alain Muller, and Fran{\c{c}}ois Petitjean.
+\newblock {InceptionTime}: Finding {AlexNet} for time series classification.
+\newblock \emph{Data Mining and Knowledge Discovery}, 34\penalty0 (6):\penalty0
+  1936--1962, sep 2020.
+\newblock \doi{10.1007/s10618-020-00710-y}.
+\newblock URL \url{https://doi.org/10.1007%2Fs10618-020-00710-y}.
+
+\end{thebibliography}

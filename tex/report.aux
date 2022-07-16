@@ -1,0 +1,112 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\bbl@cs{beforestart}
+\bibstyle{unsrtnat}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{opportunity}
+\citation{opportunity}
+\citation{opportunity}
+\citation{opportunity}
+\citation{opportunity}
+\providecommand \oddpage@label [2]{}
+\babel@aux{english}{}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Wearable motion jacket on which sensors are attached. Figure taken from \cite  {opportunity}.\relax }}{1}{figure.caption.1}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:jacket}{{1}{1}{Wearable motion jacket on which sensors are attached. Figure taken from \cite {opportunity}.\relax }{figure.caption.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Dataset}{1}{section.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Dataset description}{1}{subsection.2.1}\protected@file@percent }
+\citation{Jolliffe2011}
+\citation{sklearn_api}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Body sensor placement over the subject, for what concerns Inertial Measurement Unit on the right and Triaxial accelerometers on the left. Figure taken from \cite  {opportunity}. \relax }}{2}{figure.caption.2}\protected@file@percent }
+\newlabel{fig:sensors}{{2}{2}{Body sensor placement over the subject, for what concerns Inertial Measurement Unit on the right and Triaxial accelerometers on the left. Figure taken from \cite {opportunity}. \relax }{figure.caption.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Data preprocessing}{2}{subsection.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Correlations: Principal Component Analysis (PCA)}{2}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Homogeneous sensor type analysis}{2}{subsection.3.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Cumulative explained variance of each component for subject 1, run 1. Left panel shows the explained variance referring to different IMU sensors, while right panel refers to triaxial accelerometers. \relax }}{3}{figure.caption.3}\protected@file@percent }
+\newlabel{fig:pca}{{3}{3}{Cumulative explained variance of each component for subject 1, run 1. Left panel shows the explained variance referring to different IMU sensors, while right panel refers to triaxial accelerometers. \relax }{figure.caption.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Heterogeneous sensor type analysis}{3}{subsection.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Cumulative explained variance of each component, computation performed with all the different sensor types. The filled area represents the area between the minimum and the maximum for each component, among different combination of subject and run. \relax }}{3}{figure.caption.4}\protected@file@percent }
+\newlabel{fig:pca_het}{{4}{3}{Cumulative explained variance of each component, computation performed with all the different sensor types. The filled area represents the area between the minimum and the maximum for each component, among different combination of subject and run. \relax }{figure.caption.4}{}}
+\citation{kmeans}
+\citation{JMLR:v21:20-091}
+\citation{dtw}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Dimensionality reduction}{4}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}KMeans Clustering}{4}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.1}Same sensor type analysis}{4}{subsubsection.4.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Homogeneous sensor type classification}{4}{subsection.4.2}\protected@file@percent }
+\newlabel{sec:homo}{{4.2}{4}{Homogeneous sensor type classification}{subsection.4.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.1}Linear model: logistic regression}{4}{subsubsection.4.2.1}\protected@file@percent }
+\newlabel{fig:imuacc1}{{5a}{5}{Signal obtained with KMeans fixing 1 center.\relax }{figure.caption.5}{}}
+\newlabel{sub@fig:imuacc1}{{a}{5}{Signal obtained with KMeans fixing 1 center.\relax }{figure.caption.5}{}}
+\newlabel{fig:imuacc2}{{5b}{5}{Signal obtained with KMeans fixing 2 centers.\relax }{figure.caption.5}{}}
+\newlabel{sub@fig:imuacc2}{{b}{5}{Signal obtained with KMeans fixing 2 centers.\relax }{figure.caption.5}{}}
+\newlabel{fig:imuacc3}{{5c}{5}{Signal obtained with KMeans fixing 3 centers.\relax }{figure.caption.5}{}}
+\newlabel{sub@fig:imuacc3}{{c}{5}{Signal obtained with KMeans fixing 3 centers.\relax }{figure.caption.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Signals of the centers obtained applying KMeans on IMU accelerometers for different numbers of clusters. Plots obtained for subject 1, run 1\relax }}{5}{figure.caption.5}\protected@file@percent }
+\newlabel{fig:imuacc}{{5}{5}{Signals of the centers obtained applying KMeans on IMU accelerometers for different numbers of clusters. Plots obtained for subject 1, run 1\relax }{figure.caption.5}{}}
+\newlabel{fig:imgyro1}{{6a}{6}{Signal obtained with KMeans fixing 1 center.\relax }{figure.caption.6}{}}
+\newlabel{sub@fig:imgyro1}{{a}{6}{Signal obtained with KMeans fixing 1 center.\relax }{figure.caption.6}{}}
+\newlabel{fig:imgyro2}{{6b}{6}{Signal obtained with KMeans fixing 2 centers.\relax }{figure.caption.6}{}}
+\newlabel{sub@fig:imgyro2}{{b}{6}{Signal obtained with KMeans fixing 2 centers.\relax }{figure.caption.6}{}}
+\newlabel{fig:imgyro3}{{6c}{6}{Signal obtained with KMeans fixing 3 centers.\relax }{figure.caption.6}{}}
+\newlabel{sub@fig:imgyro3}{{c}{6}{Signal obtained with KMeans fixing 3 centers.\relax }{figure.caption.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Signals of the centers obtained applying KMeans on IMU gyroscopes for different numbers of clusters. Plots obtained for subject 1, run 1\relax }}{6}{figure.caption.6}\protected@file@percent }
+\newlabel{fig:imugyro}{{6}{6}{Signals of the centers obtained applying KMeans on IMU gyroscopes for different numbers of clusters. Plots obtained for subject 1, run 1\relax }{figure.caption.6}{}}
+\newlabel{fig:triax1}{{7a}{7}{Signal obtained with KMeans fixing 1 center.\relax }{figure.caption.7}{}}
+\newlabel{sub@fig:triax1}{{a}{7}{Signal obtained with KMeans fixing 1 center.\relax }{figure.caption.7}{}}
+\newlabel{fig:triax2}{{7b}{7}{Signal obtained with KMeans fixing 2 centers.\relax }{figure.caption.7}{}}
+\newlabel{sub@fig:triax2}{{b}{7}{Signal obtained with KMeans fixing 2 centers.\relax }{figure.caption.7}{}}
+\newlabel{fig:triax3}{{7c}{7}{Signal obtained with KMeans fixing 3 centers.\relax }{figure.caption.7}{}}
+\newlabel{sub@fig:triax3}{{c}{7}{Signal obtained with KMeans fixing 3 centers.\relax }{figure.caption.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Signals of the centers obtained applying KMeans on triaxial accelerometers for different numbers of clusters. Plots obtained for subject 1, run 1\relax }}{7}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:triax}{{7}{7}{Signals of the centers obtained applying KMeans on triaxial accelerometers for different numbers of clusters. Plots obtained for subject 1, run 1\relax }{figure.caption.7}{}}
+\citation{tsai}
+\citation{Ismail_Fawaz_2020}
+\@writefile{toc}{\contentsline {paragraph}{Dataset extraction}{8}{paragraph*.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Train and testing on original data}{8}{paragraph*.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Test on centroids amplitudes}{8}{paragraph*.12}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.2}Neural model: InceptionTime }{8}{subsubsection.4.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Dataset and training}{8}{paragraph*.14}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Test on centroids time-series}{8}{paragraph*.15}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Heterogeneous sensor type classification}{8}{subsection.4.3}\protected@file@percent }
+\bibdata{bib}
+\bibcite{opportunity}{{1}{2010}{{Daniel~Roggen and del R.~Millàn}}{{}}}
+\bibcite{Jolliffe2011}{{2}{2011}{{Jolliffe}}{{}}}
+\bibcite{sklearn_api}{{3}{2013}{{Buitinck et~al.}}{{Buitinck, Louppe, Blondel, Pedregosa, Mueller, Grisel, Niculae, Prettenhofer, Gramfort, Grobler, Layton, VanderPlas, Joly, Holt, and Varoquaux}}}
+\bibcite{kmeans}{{4}{1957}{{Lloyd}}{{}}}
+\bibcite{JMLR:v21:20-091}{{5}{2020}{{Tavenard et~al.}}{{Tavenard, Faouzi, Vandewiele, Divo, Androz, Holtz, Payne, Yurchak, Ru{\ss }wurm, Kolar, and Woods}}}
+\bibcite{dtw}{{6}{1978}{{H.~Sakoe}}{{}}}
+\bibcite{tsai}{{7}{2022}{{Oguiza}}{{}}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Test and train accuracy of a linear regressor for each sensor type. \relax }}{9}{table.caption.10}\protected@file@percent }
+\newlabel{tab:regressortrain}{{1}{9}{Test and train accuracy of a linear regressor for each sensor type. \relax }{table.caption.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Confusion matrices on test set for each sensor type logistic classifier. \relax }}{9}{figure.caption.11}\protected@file@percent }
+\newlabel{fig:cmatlogistic}{{8}{9}{Confusion matrices on test set for each sensor type logistic classifier. \relax }{figure.caption.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Accuracy of the logistic model for each sensor type and number of centers considered for clustering. \relax }}{9}{figure.caption.13}\protected@file@percent }
+\newlabel{fig:logistic_clusters}{{9}{9}{Accuracy of the logistic model for each sensor type and number of centers considered for clustering. \relax }{figure.caption.13}{}}
+\newlabel{fig:dataimuacc}{{10a}{10}{Signals of IMU accelerometers \relax }{figure.caption.16}{}}
+\newlabel{sub@fig:dataimuacc}{{a}{10}{Signals of IMU accelerometers \relax }{figure.caption.16}{}}
+\newlabel{fig:dataimugyro}{{10b}{10}{Signals of IMU gyroscopes.\relax }{figure.caption.16}{}}
+\newlabel{sub@fig:dataimugyro}{{b}{10}{Signals of IMU gyroscopes.\relax }{figure.caption.16}{}}
+\newlabel{fig:datatriax}{{10c}{10}{Signals of triaxial accelerometers\relax }{figure.caption.16}{}}
+\newlabel{sub@fig:datatriax}{{c}{10}{Signals of triaxial accelerometers\relax }{figure.caption.16}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Dataset of original signals used to train InceptionTime module for binary classification, signals are divided according to the sensor type.\relax }}{10}{figure.caption.16}\protected@file@percent }
+\newlabel{fig:data_neural}{{10}{10}{Dataset of original signals used to train InceptionTime module for binary classification, signals are divided according to the sensor type.\relax }{figure.caption.16}{}}
+\bibcite{Ismail_Fawaz_2020}{{8}{2020}{{Fawaz et~al.}}{{Fawaz, Lucas, Forestier, Pelletier, Schmidt, Weber, Webb, Idoumghar, Muller, and Petitjean}}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Linear regression accuracy in an heterogenous scenario. We consider $RUA$, $RLA$, and $BACK$ sensors for the IMU measurements and hip, back, $RUA^$, $RUA_$, $RWR$, $RKN_$ for the triaxial accelerators.\relax }}{11}{figure.caption.17}\protected@file@percent }
+\newlabel{fig:het_linear}{{11}{11}{Linear regression accuracy in an heterogenous scenario. We consider $RUA$, $RLA$, and $BACK$ sensors for the IMU measurements and hip, back, $RUA^$, $RUA_$, $RWR$, $RKN_$ for the triaxial accelerators.\relax }{figure.caption.17}{}}

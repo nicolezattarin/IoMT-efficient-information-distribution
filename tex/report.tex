@@ -1,0 +1,272 @@
+\documentclass[10pt, a4paper, twocolumn]{article}
+
+\usepackage{blindtext} % Package to generate dummy text throughout this template 
+\usepackage{multicol}
+\usepackage{lipsum}
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+\usepackage{float}
+ \usepackage{amsmath}
+ \usepackage{booktabs}
+ \usepackage{amssymb}
+ \usepackage{amsthm}
+ \usepackage{tabularx} %tabelle
+ \usepackage{tikz} %circuiti
+ \usepackage{enumerate}
+ \usepackage{pgfplots}
+ \usepackage{subcaption}
+\usepackage[toc,page]{appendix}
+ \usepackage[export]{adjustbox}
+ \usepackage{caption}
+ \usepackage{subfig}
+ \usepackage{sidecap}
+ \usepackage{graphicx}
+ \theoremstyle{definition}
+  \usepackage{multicol}
+  \usetikzlibrary{arrows}
+
+
+\usepackage[english]{babel} % Language hyphenation and typographical rules
+
+\usepackage[hmarginratio=1:1,top=32mm,columnsep=20pt]{geometry} % Document margins
+\usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption} % Custom captions under/above floats in tables or figures
+\usepackage{booktabs} % Horizontal rules in tables
+\usepackage[square,numbers]{natbib}
+\bibliographystyle{unsrtnat}
+\usepackage{lettrine} % The lettrine is the first enlarged letter at the beginning of the text
+
+\usepackage{enumitem} % Customized lists
+\setlist[itemize]{noitemsep} % Make itemize lists more compact
+
+\usepackage{titlesec} % Allows customization of titles
+\titleformat{\section}[block]{\large\scshape\centering}{\thesection.}{1em}{} % Change the look of the section titles
+\titleformat{\subsection}[block]{\large}{\thesubsection.}{1em}{} % Change the look of the section titles
+
+\usepackage{hyperref} % For hyperlinks in the PDF
+
+\title{Efficient information distribution in Internet of Medical Things (IoMT) scenarios} % Article title
+\author{Tullia Fontana, Nicolás Ortiz De Zarate, Nicole Zattarin}
+\date{} 
+\begin{document}
+
+% Print the title
+\maketitle
+
+\begin{abstract}
+The Internet of Medical Things (IoMT) is playing a central role in the healthcare industry to improve the living conditions of individuals through suitable technological solutions. Clearly, such advanced systems work by processing complex data continuously produced across a variety of different scenarios, such as physical and environmental signals. \par 
+Nevertheless, data coming from all of these sensors can easily saturate the capacity of communication networks, which makes it necessary to design a proper transmission process capable of preserving the reliability of the network at cost of the lower possible leak of information.
+\end{abstract}
+
+\section{Introduction}
+The purpose of this work is to use Machine Learning (ML) tools to assert in a quantitative way if it is possible to reduce the amount of data transmitted with a reasonable loss of information. First, we show that many of the signals produced are correlated, thus similar sensors may share same information. As a consequence, in a practical scenario, this observation suggests that it is possible to transmit only a few signals with a reasonable loss of information content. Second, we aim to quantify how much information can still be extracted by reducing the dimensionality of the dataset. To this end, a possible approach is represented by testing how well we are still able to perform a classification task on a reduced version of the original dataset. This allows to quantify the loss of information we are ready to pay in order to limit the amount of data shared among a channel.
+
+\section{Dataset}
+\subsection{Dataset description}
+We refer to the OPPORTUNITY Activity Recognition Dataset \cite{opportunity}, which is designed to benchmark human activity recognition algorithms such as classification, automatic data segmentation, sensor fusion, feature extraction, etc.
+The dataset  comprehends a collection of signals coming from different motion sensors recorded while users executed typical daily activities. In particular we focus on a subset of the recorded runs, to whom we refer as termed activity of daily living (ADL), in which the subjects are asked to do the following activities: sitting, moving in the room, going out for a walk, preparing and having a coffee, preparing and having a sandwich, cleaning up and laying down.
+Data are collected by means of body worn sensors, see Figure \ref{fig:jacket}, which provide 3D measurements. For our purposes, we consider Inertial Measurement Units (IMU) accelerators and gyroscopes, and triaxial accelerometers, see Figure \ref{fig:sensors}, with particular focus on different locomotion activities, e.g. walking, laying.
+\begin{figure} 
+         \includegraphics[width=0.5\textwidth]{images/jacket_wearable.pdf}
+    \caption{Wearable motion jacket on which sensors are attached. Figure taken from \cite{opportunity}.}\label{fig:jacket}
+\end{figure}
+
+\begin{figure*} \centering
+         \includegraphics[width=0.8\textwidth]{images/sensors}
+    \caption{Body sensor placement over the subject, for what concerns Inertial Measurement Unit on the right and Triaxial accelerometers on the left. Figure taken from \cite{opportunity}.  }\label{fig:sensors}
+\end{figure*}
+
+\subsection{Data preprocessing}
+Since each of the sensor provides 3D measurements, we introduce a first approximation by taking the euclidean modulus of the three components, as follows:
+\begin{equation}
+M = \sqrt{x^2+y^2+z^2},
+\end{equation}
+for each of the considered sensors. Therefore, from now on we will always implicitly refer to the modulus instead of the single component. Moreover, let us point out that the dataset contains a non-negligible amount of missing values, nevertheless, since our analyses take into account different subsets of the entire dataset, the NaN values problem is addressed differently each time.
+
+\section{Correlations: Principal Component Analysis (PCA)}
+Let us recall that the purpose of our analysis is to provide a strategy to reduce the amount of data to share among a communication channel, with the lower possible leak of information. To this end, we first need to show that there is indeed shared information among different signals, thus it is reasonable to approach the problem of data reduction. A possible strategy is represented by Principal Component Analysis (PCA) \cite{Jolliffe2011}, a dimensionality reduction technique which can be applied to transform data in a space of lower dimension, but also as a mathematical tool to compute how much variety of data can be explained by means of the so-called Principal components (PC). \par
+Let us then recall a well-known quantity in the PCA scenario: the explained variance. The explained variance is a statistical measure of how much variation in a dataset can be attributed to each of the principal components generated by PCA, in formula:
+\begin{equation}
+EV_i = \frac{\lambda_i}{\sum_{k=0}^{d-1}\lambda_k} ,
+\end{equation}
+where, $\lambda_k$ is the eigenvalue of the $k-th$ component and $d$ is the dimension of the new feature space.
+
+\subsection{Homogeneous sensor type analysis}
+
+For each of the sensor type, we perform a PCA \cite{sklearn_api} from a space of dimension $n$ ,without lowering the dimensionality, and we compute the explained variance. Such quantity gives indeed an estimation of how much variance of the original dataset is encoded in each component, thus, indirectly, it refers to the amount of correlation of the original features. 
+
+\begin{figure*} \centering
+         \includegraphics[width=1\textwidth]{../pca/pca_results/sub_1_run_1_ex_var.pdf}
+    \caption{Cumulative explained variance of each component for subject 1, run 1. Left panel shows the explained variance referring to different IMU sensors, while right panel refers to triaxial accelerometers.  }\label{fig:pca}
+\end{figure*}
+ Figure \ref{fig:pca} shows an example of cumulative explained variance vs number of components considered. For what concerns the IMU signals we can highlight that, for all of them, a single component explains around 90\% of the variance, while by considering two components we are able to describe approximately the 95\% of data variety. On the other side, in order to achieve a 90\% of explained variance in the triaxial accelerometers scenario we need to consider at least two components. Therefore, since PCs are obtained by means of a linear transformation of the original features, we can assert that in the case of IMU signals a single component carries almost 90\% of the information, while for what concerns the triaxial accelerators we have to consider more components. PCA applied to different runs and subjects leads to comparable results.
+ \par
+From a physical point of view such observations suggest that there is high correlation among same sensor data, thus that it is possible to consider only a few sensors for each type. Clearly, more sensors are needed in the triaxial accelerometers case, since there are originally more signals to combine. On the other hand, we could use only data coming from one or two IMU sensors of each type, with a reasonable loss in terms of information.
+
+\subsection{Heterogeneous sensor type analysis}
+As a further analysis,  we consider $RUA$, $RLA$, and $BACK$ sensors for the IMU measurements and hip, back, $RUA^$, $RUA_$, $RWR$, $RKN_$ for the triaxial accelerators, and perform PCA on all these signals gathered together. Figure \ref{fig:pca_het} shows results for all the different combinations of runs and subjects.  The main outcome is that, in order to explain at least the 90\% of variance in every condition, 8 components are needed in the worst case scenario.
+
+\begin{figure} \centering
+         \includegraphics[width=0.5\textwidth]{../pca/pca_results/fill_global_ex_var.pdf}
+    \caption{Cumulative explained variance of each component, computation performed with all the different sensor types. The filled area represents the area between the minimum and the maximum for each component, among different combination of subject and run. }\label{fig:pca_het}
+\end{figure}
+\vspace{0.2cm}
+\par
+Finally, one could argue that the explained variance refers to PCs, not to the original feature data. This is true, but since PCs are a linear combination of the physical signals, the first reflect the behaviour the latter. Moreover, one could also directly work with PCs, applying the natural dimensionality reduction induced by PCA. Nevertheless, it is relevant to highlight that PCs do not have a clear physical meaning, since these are obtained by means of a geometric transformation of the original data and live in a geometric space with a different base. 
+
+\section{Dimensionality reduction}
+
+\subsection{KMeans Clustering}
+In the previous section we asserted that it is possible to use data coming from a lower number of sensor for each type still preserving the variety of original signals. In this section we drive deeper into this possibility analyzing dimensionality reduction from a different point of view: KMeans clustering \cite{kmeans} \cite{JMLR:v21:20-091}. The basic idea is that, for a given number of centers, KMeans identifies the optimal centers with reference to a given metric. These centers are addressed as centroids, and they are computed at each iteration of KMeans algorithm, which behaviour is based on optimizing the following loss function:
+\begin{equation}
+\Phi(P,S) = \sum_{x\in P} d^2(x,S),
+\end{equation}
+where $P$ is the set of points which has to be clustered, $d$ is the metric of the metric space and $S$ is the set of centers. We consider both euclidean and dynamic time wrapping distance \cite{dtw}.
+
+\subsubsection{Same sensor type analysis}
+Here we consider data referring to two locomotion activities, walking and laying, and for each millisecond we apply KMeans clustering with 1 to 4 centers. Figures \ref{fig:imuacc}, \ref{fig:imugyro} and \ref{fig:triax} shows the signals of the centers for the three types of sensors considered, i.e. accelerometers, gyroscopes and triaxial accelerometers. For what concerns IMU accelerometers, Figure \ref{fig:imuacc} shows that considering more centers does not add significant information to the single center case, since trends are reasonably overlapping. Moreover, it is possible to highlight that even considering the signals of the centers instead of the original time-series clearly allows to distinguish between the two locomotion activities. Indeed, one could just look at the amplitudes to visually discriminare if the subject is walking or laying. A similar behaviour can be identified also in Figure \ref{fig:imugyro} with reference to gyroscopes and in Figure \ref{fig:triax}
+for triaxial accelerometers, nevertheless, in this last case the addiction of the second center seems to add information to the single center case. Such observation is coherent with what we observed in the previous section applying PCA: triaxial sensors cannot be reduced to a single signal, thus we need to consider more than one time-serie to preserve the information content. Similar results can be obtained for other subjects and runs.
+\par
+To summarize, two main results can be highlighted: first, KMeans clustering allows to reduce the number of signals for each sensor type, and the time-series of the centroids still allows to distinguish the locomotion activities performed by the subject. Indeed, it is worth to specify that the signals of each center are not physical, in the sense that these do not come directly from measurements, but they are computed as KMeans centroids.
+
+\begin{figure*} \centering
+\begin{subfigure}{\textwidth}\centering
+         \includegraphics[width=0.8\textwidth]{../clustering/clustering_results_euclidean/subject_1/run_1/IMU_acc1_centers.pdf}
+         \caption{Signal obtained with KMeans fixing 1 center.}\label{fig:imuacc1}
+     \end{subfigure}
+     
+\begin{subfigure}{\textwidth}\centering
+         \includegraphics[width=0.8\textwidth]{../clustering/clustering_results_euclidean/subject_1/run_1/IMU_acc2_centers.pdf}
+         \caption{Signal obtained with KMeans fixing 2 centers.}\label{fig:imuacc2}
+     \end{subfigure}
+     
+\begin{subfigure}{\textwidth}\centering
+         \includegraphics[width=0.8\textwidth]{../clustering/clustering_results_euclidean/subject_1/run_1/IMU_acc3_centers.pdf}
+         \caption{Signal obtained with KMeans fixing 3 centers.}\label{fig:imuacc3}
+     \end{subfigure}
+     
+  \caption{Signals of the centers obtained applying KMeans on IMU accelerometers for different numbers of clusters. Plots obtained for subject 1, run 1}\label{fig:imuacc}
+\end{figure*}
+
+
+\begin{figure*} \centering
+\begin{subfigure}{\textwidth}\centering
+         \includegraphics[width=0.8\textwidth]{../clustering/clustering_results_euclidean/subject_1/run_1/IMU_gyro1_centers.pdf}
+         \caption{Signal obtained with KMeans fixing 1 center.}\label{fig:imgyro1}
+     \end{subfigure}
+     
+\begin{subfigure}{\textwidth}\centering
+         \includegraphics[width=0.8\textwidth]{../clustering/clustering_results_euclidean/subject_1/run_1/IMU_gyro2_centers.pdf}
+         \caption{Signal obtained with KMeans fixing 2 centers.}\label{fig:imgyro2}
+     \end{subfigure}
+     
+\begin{subfigure}{\textwidth}\centering
+         \includegraphics[width=0.8\textwidth]{../clustering/clustering_results_euclidean/subject_1/run_1/IMU_gyro3_centers.pdf}
+         \caption{Signal obtained with KMeans fixing 3 centers.}\label{fig:imgyro3}
+     \end{subfigure}
+     
+  \caption{Signals of the centers obtained applying KMeans on IMU gyroscopes for different numbers of clusters. Plots obtained for subject 1, run 1}\label{fig:imugyro}
+\end{figure*}
+
+\begin{figure*} \centering
+\begin{subfigure}{\textwidth}\centering
+         \includegraphics[width=0.8\textwidth]{../clustering/clustering_results_euclidean/subject_1/run_1/triaxial_acc_1_centers.pdf}
+         \caption{Signal obtained with KMeans fixing 1 center.}\label{fig:triax1}
+     \end{subfigure}
+     
+\begin{subfigure}{\textwidth}\centering
+         \includegraphics[width=0.8\textwidth]{../clustering/clustering_results_euclidean/subject_1/run_1/triaxial_acc_2_centers.pdf}
+         \caption{Signal obtained with KMeans fixing 2 centers.}\label{fig:triax2}
+     \end{subfigure}
+     
+\begin{subfigure}{\textwidth}\centering
+         \includegraphics[width=0.8\textwidth]{../clustering/clustering_results_euclidean/subject_1/run_1/triaxial_acc_3_centers.pdf}
+         \caption{Signal obtained with KMeans fixing 3 centers.}\label{fig:triax3}
+     \end{subfigure}
+     
+  \caption{Signals of the centers obtained applying KMeans on triaxial accelerometers for different numbers of clusters. Plots obtained for subject 1, run 1}\label{fig:triax}
+\end{figure*}
+
+\subsection{Homogeneous sensor type classification}\label{sec:homo}
+Clustering allows to visually explore the effects of a dimensionality reduction, nevertheless, we are interested in providing a quantitative estimation of the information leak. To this aim, in this section we try to give an answer to the following question: how well can we still distinguish high level activity after clustering? The approach is straightforward: we train a binary classifier, binary for sake of simplicity, on part of the original features and validate its performances on a test subset. Finally, we test the accuracy of our model on the data obtained from the signals of the centroids. \par
+Two strategies are exploited: linear classifier on the amplitude of the signals and a neural model on the entire time-series.
+
+\subsubsection{Linear model: logistic regression}
+Let us first explore an approach based on performing binary classification on amplitudes. The main idea is to create a dataset of amplitudes labeled with the corresponding locomotion activity, walking or laying, train a logistic regression on the classification task and test in on the cluster data. 
+
+\paragraph{Dataset extraction} For each sensor type, let us collect all the time series referring to walking, class 1, and laying subjects, class 0. We set a window of 80 ms, and for each interval we compute the amplitude of the signal as follows:
+\begin{equation}\begin{split}
+A_W= |{X_{max}-X_{min}}|, \quad \text{with} \\ X_{max}=\max_{x\in W }x, \quad X_{min}=\min_{x\in W }x,
+\end{split}\end{equation}
+where $W$ is a fixed window. \par
+Same process is applied to the signals obtained from clustering. At the end we have three datasets: train data, i.e. 80\% of amplitudes extracted from original data,  test data, the other 20\%, and the clustering dataset.
+
+\paragraph{Train and testing on original data} The model is trained and tested on the original dataset, results in terms of accuracy are shown in Tab. \ref{tab:regressortrain}, while confusion matrices are shown in Figure \ref{fig:cmatlogistic}. Note that, if we refer to  'walking' as positive and 'laying' as negative examples, the model shows a non negligible false positive rate. This is probably due to the fact that the amplitude is still large when there is a transition from a certain locomotion activity to laying down.
+
+\begin{table*}[]\centering
+\begin{tabular}{c|cc}
+                       & test accuracy & train accuracy \\ \hline
+IMU Accelerometer      & 0.96          & 0.96           \\
+IMU Gyroscope          & 0.95          & 0.95           \\
+triaxial Accelerometer & 0.93          & 0.92          
+\end{tabular}\caption{Test and train accuracy of a linear regressor for each sensor type. }\label{tab:regressortrain}
+\end{table*}
+
+\begin{figure*} \centering
+         \includegraphics[width=0.65\textwidth]{../clustering/clustering_results_euclidean/confusion_matrix_test.pdf}
+    \caption{Confusion matrices on test set for each sensor type logistic classifier.  }\label{fig:cmatlogistic}
+\end{figure*}
+
+
+\paragraph{Test on centroids amplitudes} Finally, in order to quantify how good be a classification could be after applying KMeans clustering, we compute accuracy on the centroids dataset, for each sensor and for each number of centers considered. Results are shown in Figure \ref{fig:logistic_clusters}. The main outcome is that for IMU sensors a single center allows to distinguish the two locomotion activities with extremely high probability, while more centers are needed to reach the same accuracy in the case of triaxial accelerometers. Note that these observations are perfectly coherent with what we observed in PCA and heuristically by simply plotting the signals of the centers in Figure \ref{fig:triax}.
+
+\begin{figure} [h]
+         \includegraphics[width=0.55\textwidth]{../clustering/clustering_results_euclidean/accuracy_clusters.pdf}
+    \caption{Accuracy of the logistic model for each sensor type and number of centers considered for clustering.  }\label{fig:logistic_clusters}
+\end{figure}
+
+
+\subsubsection{Neural model: InceptionTime }
+Let us now explore a second approach based on binary classification of the entire time-series, to this end, more delicate and sophisticated tools are needed. We implement a binary classifier of time-series by means of a specific Python module \cite{tsai} with InceptionTime architecture \cite{Ismail_Fawaz_2020}.
+\paragraph{Dataset and training} In Figure \ref{fig:data_neural} we show the original measurements used to train the model, training is performed with 4 epochs and learning rate $10^{-4}$.
+
+\paragraph{Test on centroids time-series} Testing the neural model on the signals obtained from clustering returns always a 100\% accuracy and a diagonal confusion matrix. Thus, we may conclude that by means of neural models it is possible to distinguish with perfect precision the locomotion activity also on the clustered data. \par
+Nevertheless, neural architectures are more delicate than logistic regressors, since they need to be fine tuned and usually require more computational time. As a consequence, since in a IoMT scenario we are interested in transmitting and processing data quickly and with the fewer number of assumption possible, the logistic regression turns out to be better suited for the problem.
+
+\begin{figure*} 
+\begin{subfigure}{\textwidth}
+         \includegraphics[width=1\textwidth]{../clustering/figures/IMU_acc_signals_walk_lie.pdf}
+         \caption{Signals of IMU accelerometers }\label{fig:dataimuacc}
+     \end{subfigure}
+     
+\begin{subfigure}{\textwidth}
+         \includegraphics[width=1\textwidth]{../clustering/figures/IMU_gyro_signals_walk_lie.pdf}
+         \caption{Signals of IMU gyroscopes.}\label{fig:dataimugyro}
+     \end{subfigure}    
+\begin{subfigure}{\textwidth}
+         \includegraphics[width=1\textwidth, left]{../clustering/figures/triaxial_acc_signals_walk_lie.pdf}
+         \caption{Signals of triaxial accelerometers}\label{fig:datatriax}
+     \end{subfigure}
+  
+  \caption{Dataset of original signals used to train InceptionTime module for binary classification, signals are divided according to the sensor type.}\label{fig:data_neural}
+\end{figure*}
+
+\subsection{Heterogeneous sensor type classification}
+Let us now consider an heterogeneous scenario, gathering data from different sensors, in particular we consider $RUA$, $RLA$, and $BACK$ sensors for the IMU measurements and hip, back, $RUA^$, $RUA_$, $RWR$, $RKN_$ for the triaxial accelerators. We apply the same process already discussed in Section \ref{sec:homo}.
+Figure \ref{fig:het_linear} shows accuracy obtained by the linear regressor on the clustering dataset for different number of clusters used in KMeans.
+
+
+
+
+ \begin{figure} 
+
+ \includegraphics[width=0.5\textwidth]{../clustering/clustering_results_euclidean/heterogeneous_accuracy_amplitude_clusters.pdf}
+         \caption{Linear regression accuracy in an heterogenous scenario. We consider $RUA$, $RLA$, and $BACK$ sensors for the IMU measurements and hip, back, $RUA^$, $RUA_$, $RWR$, $RKN_$ for the triaxial accelerators.}\label{fig:het_linear}
+ \end{figure}
+ \newpage
+ 
+
+
+\bibliography{bib}
+
+\end{document}
+

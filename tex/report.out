@@ -1,0 +1,14 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Dataset}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Dataset description}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Data preprocessing}{section.2}% 4
+\BOOKMARK [1][-]{section.3}{Correlations: Principal Component Analysis \(PCA\)}{}% 5
+\BOOKMARK [2][-]{subsection.3.1}{Homogeneous sensor type analysis}{section.3}% 6
+\BOOKMARK [2][-]{subsection.3.2}{Heterogeneous sensor type analysis}{section.3}% 7
+\BOOKMARK [1][-]{section.4}{Dimensionality reduction}{}% 8
+\BOOKMARK [2][-]{subsection.4.1}{KMeans Clustering}{section.4}% 9
+\BOOKMARK [3][-]{subsubsection.4.1.1}{Same sensor type analysis}{subsection.4.1}% 10
+\BOOKMARK [2][-]{subsection.4.2}{Homogeneous sensor type classification}{section.4}% 11
+\BOOKMARK [3][-]{subsubsection.4.2.1}{Linear model: logistic regression}{subsection.4.2}% 12
+\BOOKMARK [3][-]{subsubsection.4.2.2}{Neural model: InceptionTime }{subsection.4.2}% 13
+\BOOKMARK [2][-]{subsection.4.3}{Heterogeneous sensor type classification}{section.4}% 14
