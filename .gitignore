@@ -18,7 +18,12 @@ gait-in-parkinsons-disease-1.0.0*
 data_frames*
 *.npy
 tex/*
-
+/network/ns-3/*
+/network/ns-allinone-3.36.1/*
+/network/ns-3-dev-NB-IOT-master/*
+/network/ns3-lena-nb-main/*
+/network/results/*
+/network/results_v0/*
 
 #mac
 *.DS_Store
