@@ -23,6 +23,8 @@ data_frames*
 /network/ns3-lena-nb-main/*
 /network/results/*
 /network/results_v0/*
+network/projectLoRaWAN/*
+
 
 #mac
 *.DS_Store
