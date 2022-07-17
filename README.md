@@ -1,4 +1,4 @@
-# IoMT-project
+# Efficient information distribution in Internet of Medical Things (IoMT) scenarios
 
 The Internet of Medical Things (IoMT) is playing a central role in the healthcare industry to improve the living conditions of individuals through suitable technological solutions. Clearly, such advanced systems work by processing complex data continuously produced across a variety of different scenarios, such as physical and environmental signals.
 Nevertheless, data coming from all of these sensors can easily saturate the capacity of com- munication networks, which makes it necessary to design a proper transmission process capable of preserving the reliability of the network at cost of the lower possible leak of information.
