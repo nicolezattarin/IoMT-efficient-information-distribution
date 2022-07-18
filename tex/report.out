@@ -12,3 +12,10 @@
 \BOOKMARK [3][-]{subsubsection.4.2.1}{Linear model: logistic regression}{subsection.4.2}% 12
 \BOOKMARK [3][-]{subsubsection.4.2.2}{Neural model: InceptionTime }{subsection.4.2}% 13
 \BOOKMARK [2][-]{subsection.4.3}{Heterogeneous sensor type classification}{section.4}% 14
+\BOOKMARK [1][-]{section.5}{Communication technologies}{}% 15
+\BOOKMARK [2][-]{subsection.5.1}{LPWA technologies}{section.5}% 16
+\BOOKMARK [3][-]{subsubsection.5.1.1}{LoRaWAN}{subsection.5.1}% 17
+\BOOKMARK [1][-]{section.6}{LoRa NS-3 simulation}{}% 18
+\BOOKMARK [2][-]{subsection.6.1}{Implementation}{section.6}% 19
+\BOOKMARK [2][-]{subsection.6.2}{Simulation and results}{section.6}% 20
+\BOOKMARK [1][-]{section.7}{Further studies and possible improvements}{}% 21
