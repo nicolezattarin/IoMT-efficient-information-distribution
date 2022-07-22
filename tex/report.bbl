@@ -1,4 +1,4 @@
-\begin{thebibliography}{8}
+\begin{thebibliography}{19}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -74,5 +74,81 @@ Hassan~Ismail Fawaz, Benjamin Lucas, Germain Forestier, Charlotte Pelletier,
   1936--1962, sep 2020.
 \newblock \doi{10.1007/s10618-020-00710-y}.
 \newblock URL \url{https://doi.org/10.1007%2Fs10618-020-00710-y}.
+
+\bibitem[Sari et~al.(2019)Sari, Wirara, Harwahyu, and Sari]{Lora_IoT}
+Eka~Kurnia Sari, Ayubi Wirara, Ruki Harwahyu, and Riri~Fitri Sari.
+\newblock Lora characteristics analysis for iot application using ns3
+  simulator.
+\newblock In \emph{2019 IEEE R10 Humanitarian Technology Conference
+  (R10-HTC)(47129)}, pages 205--210, 2019.
+\newblock \doi{10.1109/R10-HTC47129.2019.9042485}.
+
+\bibitem[Antonio~Iera(2018)]{wearable}
+Giuseppe Araniti Antonella~Molinaro Antonio~Iera, Claudia~Campolo.
+\newblock Proposed wearables network architecture.
+\newblock In \emph{A-WEAR PROJECT: A network for dynamic WEarable Applications
+  with pRivacy constraints}, volume Marie Skłodowska-Curie Innovative Training
+  Networks, 2018.
+
+\bibitem[Khan and Portmann(2018)]{experimental_evaluation}
+Furqan~Hameed Khan and Marius Portmann.
+\newblock Experimental evaluation of lorawan in ns-3.
+\newblock In \emph{2018 28th International Telecommunication Networks and
+  Applications Conference (ITNAC)}, pages 1--8, 2018.
+\newblock \doi{10.1109/ATNAC.2018.8615313}.
+
+\bibitem[O'Shea()]{market}
+Daniel O'Shea.
+\newblock Lora looks to leverage options before nb-iot proliferates.
+\newblock
+  https://www.iotworldtoday.com/2019/08/28/lora-looks-to-leverage-options-before-nb-iot-proliferates/.
+\newblock Accessed: 2022-07-18.
+
+\bibitem[Lalle et~al.(2019)Lalle, Fourati, Fourati, and
+  Barraca]{comparative_study}
+Yandja Lalle, Lamia~Chaari Fourati, Mohamed Fourati, and João~Paulo Barraca.
+\newblock A comparative study of lorawan, sigfox, and nb-iot for smart water
+  grid.
+\newblock In \emph{2019 Global Information Infrastructure and Networking
+  Symposium (GIIS)}, pages 1--6, 2019.
+\newblock \doi{10.1109/GIIS48668.2019.9044961}.
+
+\bibitem[Alam(2015)]{typical_values}
+Muhammad Alam.
+\newblock Strategies for optimal mac parameters tuning in ieee 802.15.6
+  wearable wireless sensor networks.
+\newblock \emph{Journal of Medical Systems}, 07 2015.
+\newblock \doi{10.1007/s10916-015-0277-4}.
+
+\bibitem[LoR()]{LoRa_repository}
+projectlorawan.
+\newblock \url{https://github.com/heldercs/projectLoRaWAN/tree/master/scratch}.
+\newblock Accessed: 2022-07-17.
+
+\bibitem[Sig()]{Signet}
+Signet lab - dei, university of padova.
+\newblock \url{https://github.com/signetlabdei/lorawan}.
+\newblock Accessed: 2022-07-17.
+
+\bibitem[NB_()]{NB_IoT}
+Experimental github repository for the nb-iot development.
+\newblock \url{https://github.com/TommyPec/ns-3-dev-NB-IOT}.
+\newblock Accessed: 2022-07-17.
+
+\bibitem[LEN()]{LENA}
+The lena ns-3 lte module documentation release v8.
+\newblock \url{https://dokumen.tips/documents/lena-lte-module-doc.html}.
+\newblock Accessed: 2022-07-17.
+
+\bibitem[Masek et~al.(2019)Masek, Stusek, Zeman, Drapela, Ometov, and
+  Hosek]{modify_LTE}
+Pavel Masek, Martin Stusek, Krystof Zeman, Roman Drapela, Aleksandr Ometov, and
+  Jiri Hosek.
+\newblock Implementation of 3gpp lte cat-m1 technology in ns-3: System
+  simulation and performance.
+\newblock In \emph{2019 11th International Congress on Ultra Modern
+  Telecommunications and Control Systems and Workshops (ICUMT)}, pages 1--7,
+  2019.
+\newblock \doi{10.1109/ICUMT48472.2019.8970869}.
 
 \end{thebibliography}

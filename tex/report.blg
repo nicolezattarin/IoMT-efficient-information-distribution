@@ -31,6 +31,8 @@ Too many commas in name 1 of "Daniel Roggen, Alberto Calatroni, Mirco Rossi, Tho
 while executing---line 1233 of file unsrtnat.bst
 Too many commas in name 1 of "Daniel Roggen, Alberto Calatroni, Mirco Rossi, Thomas Holleczek, Gerhard Tröster, Paul Lukowicz, Gerald Pirkl, David Bannach, Alois Ferscha, Jakob Doppler, Clemens Holzmann, Marc Kurz, Gerald Holl, Ricardo Chavarriaga, Hesam Sagha, Hamidreza Bayati, and José del R. Millàn" for entry opportunity
 while executing---line 1233 of file unsrtnat.bst
+Too many commas in name 1 of "Antonio Iera, Claudia Campolo, Giuseppe Araniti, Antonella Molinaro" for entry wearable
+while executing---line 1233 of file unsrtnat.bst
 Name 1 in "Daniel Roggen, Alberto Calatroni, Mirco Rossi, Thomas Holleczek, Gerhard Tröster, Paul Lukowicz, Gerald Pirkl, David Bannach, Alois Ferscha, Jakob Doppler, Clemens Holzmann, Marc Kurz, Gerald Holl, Ricardo Chavarriaga, Hesam Sagha, Hamidreza Bayati, and José del R. Millàn" has a comma at the end for entry opportunity
 while executing---line 1315 of file unsrtnat.bst
 Too many commas in name 1 of "Daniel Roggen, Alberto Calatroni, Mirco Rossi, Thomas Holleczek, Gerhard Tröster, Paul Lukowicz, Gerald Pirkl, David Bannach, Alois Ferscha, Jakob Doppler, Clemens Holzmann, Marc Kurz, Gerald Holl, Ricardo Chavarriaga, Hesam Sagha, Hamidreza Bayati, and José del R. Millàn" for entry opportunity
@@ -88,45 +90,54 @@ while executing---line 1315 of file unsrtnat.bst
 Too many commas in name 1 of "Daniel Roggen, Alberto Calatroni, Mirco Rossi, Thomas Holleczek, Gerhard Tröster, Paul Lukowicz, Gerald Pirkl, David Bannach, Alois Ferscha, Jakob Doppler, Clemens Holzmann, Marc Kurz, Gerald Holl, Ricardo Chavarriaga, Hesam Sagha, Hamidreza Bayati, and José del R. Millàn" for entry opportunity
 while executing---line 1315 of file unsrtnat.bst
 Warning--can't use both author and editor fields in Jolliffe2011
-You've used 8 entries,
+Too many commas in name 1 of "Antonio Iera, Claudia Campolo, Giuseppe Araniti, Antonella Molinaro" for entry wearable
+while executing---line 1315 of file unsrtnat.bst
+Too many commas in name 1 of "Antonio Iera, Claudia Campolo, Giuseppe Araniti, Antonella Molinaro" for entry wearable
+while executing---line 1315 of file unsrtnat.bst
+Warning--empty year in market
+Warning--empty year in LoRa_repository
+Warning--empty year in Signet
+Warning--empty year in NB_IoT
+Warning--empty year in LENA
+You've used 19 entries,
             2481 wiz_defined-function locations,
-            614 strings with 6880 characters,
-and the built_in function-call counts, 3826 in all, are:
-= -- 285
-> -- 268
-< -- 7
-+ -- 100
-- -- 84
-* -- 318
-:= -- 638
-add.period$ -- 31
-call.type$ -- 8
-change.case$ -- 15
-chr.to.int$ -- 8
-cite$ -- 9
-duplicate$ -- 173
-empty$ -- 308
-format.name$ -- 94
-if$ -- 796
+            675 strings with 9092 characters,
+and the built_in function-call counts, 7551 in all, are:
+= -- 603
+> -- 397
+< -- 16
++ -- 160
+- -- 122
+* -- 543
+:= -- 1154
+add.period$ -- 70
+call.type$ -- 19
+change.case$ -- 37
+chr.to.int$ -- 19
+cite$ -- 29
+duplicate$ -- 395
+empty$ -- 718
+format.name$ -- 141
+if$ -- 1657
 int.to.chr$ -- 1
-int.to.str$ -- 9
-missing$ -- 8
-newline$ -- 55
-num.names$ -- 24
-pop$ -- 72
+int.to.str$ -- 20
+missing$ -- 14
+newline$ -- 116
+num.names$ -- 45
+pop$ -- 215
 preamble$ -- 1
-purify$ -- 8
+purify$ -- 19
 quote$ -- 0
-skip$ -- 112
+skip$ -- 250
 stack$ -- 0
-substring$ -- 149
-swap$ -- 40
-text.length$ -- 2
+substring$ -- 239
+swap$ -- 93
+text.length$ -- 7
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 53
-warning$ -- 1
-while$ -- 26
+type$ -- 130
+warning$ -- 6
+while$ -- 48
 width$ -- 0
-write$ -- 123
-(There were 42 error messages)
+write$ -- 267
+(There were 45 error messages)
